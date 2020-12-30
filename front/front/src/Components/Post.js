@@ -51,16 +51,6 @@ export default function MainContainer ()  {
       fetchData();
       }, []);
 
-  const deletePost = (id) => {
-    axios.delete(`http://localhost:3001/posts/${id}`)
-    .then(response => {
-      setPosts(posts.filter(x => x.id !== id))
-      console.log("set")
-    }).catch(data =>  {
-      console.log(data)
-    })
-  }
-
   const updatePost = (id) => {
     axios.patch(`http://localhost:3001/posts/${id}`,
     { 
@@ -69,6 +59,18 @@ export default function MainContainer ()  {
     ).then(response => {
       setPosts(posts.filter(x => x.id !== id))
       console.log(response.data)
+    }).catch(error => {
+      console.log("registration error", error)
+    }).catch(data =>  {
+      console.log(data)
+    })
+  }
+
+  const deletePost = (id) => {
+    axios.delete(`http://localhost:3001/posts/${id}`)
+    .then(response => {
+      setPosts(posts.filter(x => x.id !== id))
+      console.log("set")
     }).catch(data =>  {
       console.log(data)
     })
@@ -89,6 +91,7 @@ export default function MainContainer ()  {
             <Input
                 type="text"
                 name="post"
+                fullWidth
                 value={createpost}
                 placeholder="Enter text"
                 onChange={event => setCreatepost(event.target.value)}
@@ -116,20 +119,19 @@ export default function MainContainer ()  {
                   <Input
                     type="text"
                     name="post"
-                    value={updatePost} 
+                    value={updatepost} 
                     onChange={event => handleUpdate(event)}
                   />
                   <IconButton
                     size="small" 
                     aria-label="edit"
-                    onClick={() => updatePost(item.id)}
-                  >
+                    onClick={() => updatePost(item.id)}>
                     <EditIcon fontSize="small" />
                   </IconButton>
                   <IconButton
-                    aria-label="delete"
-                    onChange={() => deletePost(item.id)}
-                  >
+                      size="small" 
+                      aria-label="delete"
+                      onClick={() => deletePost(item.id)}>
                     <DeleteIcon fontSize="small" />
                   </IconButton>
                 </form>
