@@ -12,7 +12,7 @@ class PostsController < ApplicationController
 
   def update
     @post = Post.find(params[:id])
-    @post.update_attributes(content: params[:content])
+    @post.update(content: params[:content])
     render json: @post
   end
 
