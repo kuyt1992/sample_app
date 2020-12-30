@@ -20,6 +20,7 @@ export default function MainContainer ()  {
   const [posts, setPosts] = useState([]);
   const [updatepost, setUpdatepost] = useState("");
 
+  // 新規投稿。新しいpostをaxios経由でDBに書き込む。
   const createPost = (event) => {
     console.log("イベント発火")
     axios.post('http://localhost:3001/posts',
@@ -41,6 +42,7 @@ export default function MainContainer ()  {
     event.preventDefault()
   }
 
+  // 一覧表示。レンダーされる度にgetが走る。
   useEffect(() => {
     async function fetchData()  {
       const result = await axios.get('http://localhost:3001/posts',)
