@@ -6,13 +6,13 @@ class PostsController < ApplicationController
   end
 
   def create
-    @post = Post.create(content: params[:content])
+    @post = Post.create(post_params)
     render json: @post
   end
 
   def update
     @post = Post.find(params[:id])
-    @post.update(content: params[:content])
+    @post.update(post_params)
     render json: @post
   end
 
@@ -23,5 +23,11 @@ class PostsController < ApplicationController
     else
       render json: @issue.errors, status: :unprocessable_entity
     end
+  end
+
+  private
+
+  def post_params
+    params.require(:post).permit(:id, :content)
   end
 end
