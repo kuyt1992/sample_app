@@ -10,6 +10,7 @@ namespace :db do
   end
 
   private
+
   def config_file
     if Rails.env.development?
       'config/database.yml'
