@@ -59,7 +59,10 @@ export default function MainContainer ()  {
       content: updatepost
     }
     ).then(response => {
-      setPosts(posts.filter(x => x.id !== id))
+      const newposts = [...posts];
+      const index = newposts.findIndex(x => x.id === id);
+      newposts.splice(index, 1, response["data"]);
+      setPosts([{posts: newposts}])
       console.log(response.data)
     }).catch(error => {
       console.log("registration error", error)
