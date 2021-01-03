@@ -44,5 +44,8 @@ module Myapp
         :methods => [:get, :post, :patch, :delete, :options]
       end
     end
+    config.generators do |g|
+      g.orm :active_record, migration: false
+    end
   end
 end
