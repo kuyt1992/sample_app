@@ -21,7 +21,7 @@ class PostsController < ApplicationController
     if @post.destroy
       head :no_content, status: :ok
     else
-      render json: @issue.errors, status: :unprocessable_entity
+      render json: @post.errors, status: :unprocessable_entity
     end
   end
 
