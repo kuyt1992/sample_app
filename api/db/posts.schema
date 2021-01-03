@@ -2,6 +2,7 @@ create_table "posts", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8
   t.string "content"
   t.datetime "created_at", null: false
   t.datetime "updated_at", null: false
+  t.datetime :deleted_at, null: true
   
   t.index ["content"], name: "index_posts_on_content"
 end
