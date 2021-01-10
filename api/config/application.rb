@@ -22,7 +22,7 @@ Bundler.require(*Rails.groups)
 module Myapp
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.
-    config.load_defaults 6.1
+    config.load_defaults 6.0
 
     # Configuration for the application, engines, and railties goes here.
     #
@@ -43,6 +43,9 @@ module Myapp
         :headers => :any,
         :methods => [:get, :post, :patch, :delete, :options]
       end
+    end
+    config.generators do |g|
+      g.orm :active_record, migration: false
     end
   end
 end
