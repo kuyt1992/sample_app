@@ -32,6 +32,9 @@ gem 'devise_token_auth'
 # ActiveModelをserializationするためのライブラリ　json出力に対応
 gem 'active_model_serializers'
 
+# 環境変数を管理
+gem 'dotenv-rails'
+
 # DB
 gem 'ridgepole'
 
