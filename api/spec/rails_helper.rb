@@ -21,5 +21,24 @@ RSpec.configure do |config|
   # arbitrary gems may also be filtered via:
   # config.filter_gems_from_backtrace("gem name")
 
+  # user = FactoryBot.create(:user) -> user = create(:user) と書ける
   config.include FactoryBot::Syntax::Methods
+
+  # テスト後にDBデータを消す設定
+  config.before(:suite) do
+    DatabaseCleaner.clean_with(:truncation)
+    DatabaseCleaner.strategy = :transaction
+  end
+
+  # config.before(:each, :js => true) do
+  #   DatabaseCleaner.strategy = :truncation
+  # end
+
+  config.before(:each) do
+    DatabaseCleaner.start
+  end
+
+  config.after(:each) do
+    DatabaseCleaner.clean
+  end
 end
