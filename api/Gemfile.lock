@@ -211,6 +211,7 @@ DEPENDENCIES
   byebug
   devise
   devise_token_auth
+  dip
   dotenv-rails
   listen (~> 3.3)
   mysql2 (~> 0.5)

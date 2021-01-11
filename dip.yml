@@ -1,0 +1,79 @@
+# Required minimum dip version
+version: '4.1'
+
+environment:
+  COMPOSE_EXT: development
+
+compose:
+  files:
+    - docker-compose.yml
+
+interaction:
+  bash:
+    description: Open the Bash shell in api's container
+    service: api
+    command: /bin/bash
+    compose:
+      run_options: [no-deps]
+
+  bundle:
+    description: Run Bundler commands
+    service: api
+    command: bundle
+
+  rake:
+    description: Run Rake commands
+    service: api
+    command: bundle exec rake
+
+  rails:
+    description: Run Rails commands
+    service: api
+    command: bundle exec rails
+    subcommands:
+      s:
+        description: Run Rails server at http://localhost:3001
+        service: api
+        compose:
+          run_options: [service-ports, use-aliases]
+
+  yarn:
+    description: Run yarn command
+    service: api
+    command: yarn
+
+  rubocop:
+    description: Run Rubocop commands
+    service: api
+    command: bundle exec rubocop
+
+  ridgepole:
+    description: Run Ridgepole commands
+    service: api
+    command: bundle exec rails db:apply
+
+  minitest:
+    description: Run minitest
+    service: api
+    environment:
+      RAILS_ENV: test
+    command: bundle exec rails test
+
+  # rspec:
+  #   description: Run Rspec commands
+  #   service: api
+  #   environment:
+  #     RAILS_ENV: test
+  #   command: bundle exec rspec
+
+  # psql:
+  #   description: Run Postgres psql console
+  #   service: app
+  #   default_args: db_dev
+  #   command: psql -h pg -U postgres
+
+provision:
+  - dip compose down --volumes
+  - dip compose up -d pg redis
+  - dip bash -c ./bin/setup
+  - dip bundle install
