@@ -59,12 +59,12 @@ interaction:
       RAILS_ENV: test
     command: bundle exec rails test
 
-  # rspec:
-  #   description: Run Rspec commands
-  #   service: api
-  #   environment:
-  #     RAILS_ENV: test
-  #   command: bundle exec rspec
+  rspec:
+    description: Run Rspec commands
+    service: api
+    environment:
+      RAILS_ENV: test
+    command: bundle exec rspec
 
   # psql:
   #   description: Run Postgres psql console
