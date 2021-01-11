@@ -46,6 +46,11 @@ module Myapp
     end
     config.generators do |g|
       g.orm :active_record, migration: false
+      g.test_framework :rspec,
+            view_specs: false,
+            helper_specs: false,
+            controller_specs: true,
+            routing_specs: false
     end
   end
 end
