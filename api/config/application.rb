@@ -46,6 +46,15 @@ module Myapp
     end
     config.generators do |g|
       g.orm :active_record, migration: false
+      g.test_framework :rspec,
+            fixtures: true,
+            view_specs: false,
+            helper_specs: false,
+            controller_specs: true,
+            routing_specs: false
+
+      # テストデータのパス設定
+      g.fixture_replacement :factory_bot, dir: "spec/factories"
     end
   end
 end
