@@ -9,7 +9,7 @@ services:
       MYSQL_PASSWORD: password
       MYSQL_ROOT_PASSWORD: password
       MYSQL_HOST: db
-      MYSQL_DATABASE: sample_app_development
+      # MYSQL_DATABASE: sample_app_development
       TZ: Asia/Tokyo
     volumes:
       - ./db/mysql/volumes:/var/lib/mysql-files
