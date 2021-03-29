@@ -39,7 +39,7 @@ interaction:
 
   yarn:
     description: Run yarn command
-    service: api
+    service: front
     command: yarn
 
   rubocop:
