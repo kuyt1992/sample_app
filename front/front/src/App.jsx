@@ -17,7 +17,7 @@ function App() {
         {/* 投稿一覧 */}
         <Route exact path="/posts" component={Posts} />
         {/* ユーザー一覧 */}
-        <Route exact path="/posts" component={Users} />
+        <Route exact path="/users" component={Users} />
       </Switch>
     </Router>
   )

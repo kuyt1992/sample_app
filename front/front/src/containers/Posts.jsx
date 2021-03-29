@@ -15,32 +15,87 @@
 // import EditIcon from '@material-ui/icons/Edit';
 // import DeleteIcon from '@material-ui/icons/Delete';
 
-import React, { useState, useEffect } from 'react';
+import React, { useReducer, useEffect } from 'react';
+import styled from 'styled-components';
 import { fetchPosts } from '../apis/posts'; 
+import { initialState, postsActionTyps, postsReducer } from '../reducers/posts';
+import MainLogo from '../assets/main-logo.png';
+import MainCoverImage from '../assets/main-cover2.jpg';
 
 export const Posts = () => {
 
+  const [state, dispatch] = useReducer(postsReducer, initialState);
+
   useEffect(() => {
-    fetchPosts()
-    .then((data) => 
-    console.log(data)
+    dispatch({ type: postsActionTyps.FETCHING });
+    fetchPosts().then((data) => 
+      dispatch({
+        type: postsActionTyps.FETCH_SUCCESS,
+        payload: {
+          postLists: data
+        }
+      })
+      // console.log(data)
     )
   },[])
 
+  // useEffect(() => {
+  //   dispatch({ type: postsActionTyps.FETCHING });
+  //   fetchPosts()
+  //   .then((data) =>
+  //     dispatch({
+  //       type: postsActionTyps.FETCH_SUCCESS,
+  //       payload: {
+  //         postsList: data
+  //       }
+  //     })
+  //   )
+  // }, [])
+  // useEffect(() => {
+  //   fetchPosts()
+  //   .then((data) =>
+  //     // console.log(data)
+  //     console.log({postsList: data})
+  //   )
+  // }, [])
+
+
   return (
     <React.Fragment>
-      投稿一覧
+      <HeaderWrapper>
+        <MainLogoImage src={MainLogo} alt="main logo" />
+      </HeaderWrapper>
+      <MainCoverImageWrapper>
+        <MainCover src={MainCoverImage} alt="main cover" />
+      </MainCoverImageWrapper>
+      {
+        state && state.postsList && state.postsList.map(post => 
+          <div key={post.id}>
+            {post.content}
+          </div>
+        )
+      }
+      {console.log(state.postsList)}
     </React.Fragment>
   )
 }
-//   return (
-//     <React.Fragment>
-//       レストラン一覧
-//     </React.Fragment>
-//   )
-// }
 
+const HeaderWrapper = styled.div`
+  display: flex;
+  justify-content: flex-start;
+  padding: 8px 32px;
+`;
 
+const MainLogoImage = styled.img`
+  height: 80px;
+`
+const MainCoverImageWrapper = styled.div`
+  text-align: center;
+`;
+
+const MainCover = styled.img`
+  height: 700px;
+`;
 
 
 
